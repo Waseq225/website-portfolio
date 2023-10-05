@@ -1694,8 +1694,8 @@ input, select, textarea {
 			font-weight: 400;
 		}
 		.circle{
-			height: 156px;
-			width: 156px;
+			height: 120px;
+			width: 120px;
 			background-color: #ffffff;
 			border-radius: 100%;
 			
@@ -1713,8 +1713,8 @@ input, select, textarea {
 			background-position: center;
 		}
 		.badge{
-			height: 156px;
-			width: 156px;
+			height: 120px;
+			width: 120px;
 		}
 
 		.badge.saa{
@@ -1732,8 +1732,18 @@ input, select, textarea {
 
 		.cert{
 			display: flex;
+			flex-wrap: wrap;
 			gap: 1rem;
+		}
+
+		.view {
+			padding-top: 3rem;
 		}
 		#skillsandcertification a{
 			border-bottom: none;
+		}
+
+		.skill-flexbox{
+			display: flex;
+			gap: 2rem;
 		}
