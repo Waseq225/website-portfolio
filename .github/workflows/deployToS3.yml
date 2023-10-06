@@ -23,7 +23,7 @@ jobs:
     - name: Sync to S3
       run: |
         aws s3 sync ./Website s3://waseq-cloud-resume-challenge
-        
+
     - name: Create CloudFront Invalidation
       run: |
-        aws cloudfront create-invalidation --distribution-id YOUR_DISTRIBUTION_ID --paths "/*"
+        aws cloudfront create-invalidation --distribution-id E24YFQSX8IMD57 --paths "/*"
