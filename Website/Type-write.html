@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Typewriter Effect</title>
+
+    <style>
+        /* CSS for the typewriter effect */
+        body {
+            padding: 0;
+            margin: 0;
+            font-size: 30px;
+            color: rgb(255, 255, 255);
+            text-shadow: 0 0 4px #000000, 0 0 5px #000000;
+            font-family: monospace;
+
+        }
+
+        .wrap {
+            display: flex;
+            min-height: 100vh;
+            flex-direction: column;
+            justify-content: center;
+            background-image: url('../../Website/images/Catsleep.png');
+            
+            background-size: cover;
+            /* Adjust as needed */
+            background-position: center center;
+            /* Adjust as needed */
+            background-repeat: no-repeat;
+        }
+
+        .wrap>* {
+
+            text-align: center;
+        }
+
+        #typewriter {
+            font-size: 30px;
+            font-family: monospace;
+            text-align: center;
+            overflow: hidden;
+            white-space: wrap;
+            margin: 0 auto;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <h1>Hi there,</h1>
+        <div id="typewriter"></div>
+
+    </div>
+
+    <script>
+        // JavaScript for the typewriter effect
+        const sentences = [
+            "My name is Waseq.",
+            "I am a Solutions Architect,",
+            "I am a Machine Learning enthusiast,",
+            "I play video games,",
+            "And love my cat."
+        ];
+
+        const typewriter = document.getElementById('typewriter');
+        let sentenceIndex = 0;
+        let charIndex = 0;
+
+        function typeSentence() {
+            if (charIndex < sentences[sentenceIndex].length) {
+                typewriter.innerHTML += sentences[sentenceIndex].charAt(charIndex);
+                charIndex++;
+                setTimeout(typeSentence, 50); // Adjust typing speed here
+            } else {
+                setTimeout(eraseSentence, 2000); // Adjust pause before erasing here
+            }
+        }
+
+        function eraseSentence() {
+            if (charIndex > 0) {
+                typewriter.innerHTML = sentences[sentenceIndex].substring(0, charIndex - 1);
+                charIndex--;
+                setTimeout(eraseSentence, 50); // Adjust erasing speed here
+            } else {
+                sentenceIndex = (sentenceIndex + 1) % sentences.length;
+                setTimeout(typeSentence, 1000); // Adjust pause between sentences here
+            }
+        }
+
+        // Start the typewriter effect
+        typeSentence();
+    </script>
+</body>
+
+</html>
