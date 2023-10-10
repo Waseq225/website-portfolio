@@ -1,0 +1,78 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: 'AWS::Serverless-2016-10-31'
+Description: AWS SAM Template for an HTTP API Gateway invoking a Lambda function with DynamoDB access
+
+Resources:
+  MyLambdaRole:
+    Type: 'AWS::IAM::Role'
+    Properties:
+      RoleName: MyLambdaRole
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - lambda.amazonaws.com
+            Action:
+              - 'sts:AssumeRole'
+      ManagedPolicyArns:
+        - 'arn:aws:iam::aws:policy/AWSLambda_FullAccess'
+        - 'arn:aws:iam::aws:policy/AmazonDynamoDBFullAccess'
+
+  CloudResumeFunction:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      FunctionName: CloudResumeFunction
+      Handler: lambda_function.lambda_handler
+      Runtime: python3.8
+      Role: !GetAtt MyLambdaRole.Arn
+      CodeUri: ./PythonCodes
+      Environment:
+        Variables:
+          DYNAMODB_TABLE_NAME: cloudresume
+      Events:
+        ExplicitApi: 
+          Type: HttpApi
+          Properties:
+            ApiId: !Ref MyHttpApi
+            Method: GET
+            Path: /CloudResumeFunction
+
+  MyHttpApi:
+    Type: 'AWS::Serverless::HttpApi'
+    Properties:
+      StageName: prod
+      CorsConfiguration:
+        AllowOrigins:
+          - '*'
+        AllowMethods:
+          - 'OPTIONS'
+          - 'GET'
+        AllowHeaders:
+          - 'authorization'
+          - '*'
+      DefinitionBody:
+        openapi: '3.0.0'
+        info:
+          title: MyApi
+        paths:
+          "/":
+            get: 
+              x-amazon-apigateway-integration:
+                uri: !Sub arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${CloudResumeFunction.Arn}/invocations
+                httpMethod: GET
+                type: aws_proxy
+
+  LambdaPermissionForApiGateway:
+    Type: 'AWS::Lambda::Permission'
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName: !GetAtt CloudResumeFunction.Arn
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${MyHttpApi}/*/GET/CloudResumeFunction
+
+Outputs:
+  MyApiEndpoint:
+    Description: URL for the API Gateway endpoint
+    Value: !Sub 'https://${MyHttpApi}.execute-api.${AWS::Region}.amazonaws.com/prod/'
