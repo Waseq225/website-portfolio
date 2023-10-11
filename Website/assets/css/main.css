@@ -1886,20 +1886,24 @@ body.is-preload #footer {
 	gap: 2rem;
 }
 
-h1#typewriter {
-	min-height: 3rem;
+#typewriter {
+	min-height: 2.5rem;
 }
 
 
-.project-main a:hover{
+.project-main a:hover {
 	border-bottom: solid 2px #ffffff;
 }
+
 .about-photo-box {
 	width: 100%;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	margin-bottom: 2rem;
+	gap: 2rem;
+	font-size: smaller;
+	flex-wrap: wrap;
 }
 
 .about-photo {
@@ -1908,6 +1912,35 @@ h1#typewriter {
 	background-repeat: no-repeat;
 	background-size: cover;
 	border-radius: 100%;
-	height: 13rem;
-	width: 13rem;
+	height: 11rem;
+	width: 11rem;
+}
+
+
+.about-short {
+	display: flex;
+	flex-direction: column;
+	gap: .9rem;
+}
+
+.short-item {
+
+	display: flex;
+	flex-wrap: nowrap;
+
+}
+
+.short-item>.first-item {
+	width: 6rem;
+}
+
+.resume-button-box {
+	margin-top: 1rem;
+}
+
+.resume-button {
+	padding: .5rem 1rem;
+	background-color: #f0f0f0;
+	color: #1b1f22;
+	border-radius: 50px;
 }

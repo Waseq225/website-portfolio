@@ -1,8 +1,7 @@
 const sentences = [
-    "Hi, I\'m Waseq",
-    "I\'m based in Sydney NSW",
-    "I am a Solutions Architect",
-    "I am a Machine Learning enthusiast",
+    "I\'m a Solutions Architect",
+    "I\'m a Data Analyst",
+    "I\'m a Machine Learning Enthusiast"
 ];
 
 const typewriter = document.getElementById('typewriter');
