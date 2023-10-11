@@ -1206,7 +1206,7 @@ input, select, textarea {
 		position: relative;
 		min-height: 100vh;
 		width: 100%;
-		padding: 4rem 2rem;
+		padding: 3rem 2rem;
 		z-index: 3;
 	}
 
@@ -1755,4 +1755,8 @@ input, select, textarea {
 		.skill-flexbox{
 			display: flex;
 			gap: 2rem;
+		}
+
+		h1#typewriter{
+			min-height: 3rem;
 		}
