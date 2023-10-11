@@ -1,9 +1,8 @@
 const sentences = [
-    " My name is Waseq",
-    " I am a Solutions Architect",
-    " I am a Machine Learning enthusiast",
-    " I play video games",
-    " I love my cat"
+    "Hi, I\'m Waseq",
+    "I\'m based in Sydney NSW",
+    "I am a Solutions Architect",
+    "I am a Machine Learning enthusiast",
 ];
 
 const typewriter = document.getElementById('typewriter');
@@ -21,7 +20,7 @@ function typeSentence() {
 }
 
 function eraseSentence() {
-    if (charIndex > 1) {
+    if (charIndex > 0) {
         typewriter.innerHTML = sentences[sentenceIndex].substring(0, charIndex - 1);
         charIndex--;
         setTimeout(eraseSentence, 50); // Adjust erasing speed here
